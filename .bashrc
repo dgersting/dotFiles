@@ -9,19 +9,11 @@
 # Load system-wide bashrc
 [ -f /etc/bash.bashrc ] && . /etc/bash.bashrc
 
-# Load bash files from Dropbox (if Dropbox exists)
-if [ -d ~/Dropbox ]; then
-  dropboxBaseDir="$HOME/Dropbox/.sync/linuxHome/bash"
-  [ -f "$dropboxBaseDir/colors" ]    && . "$dropboxBaseDir/colors"
-#  [ -f "$dropboxBaseDir/prompt" ]    && . "$dropboxBaseDir/prompt"
-  [ -f "$dropboxBaseDir/aliases" ]   && . "$dropboxBaseDir/aliases"
-  [ -f "$dropboxBaseDir/functions" ] && . "$dropboxBaseDir/functions"
-else
-  [ -f ~/.bash_colors ]    && . ~/.bash_colors
-#  [ -f ~/.bash_ps1 ]       && . ~/.bash_ps1
-  [ -f ~/.bash_aliases ]   && . ~/.bash_aliases
-  [ -f ~/.bash_functions ] && . ~/.bash_functions
-fi
+# Load extra bash files
+[ -f ~/.bash_colors ]    && . ~/.bash_colors
+[ -f ~/.bash_prompt ]    && . ~/.bash_prompt
+[ -f ~/.bash_aliases ]   && . ~/.bash_aliases
+[ -f ~/.bash_functions ] && . ~/.bash_functions
 
 #----------------------
 # Settings and Config
