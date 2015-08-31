@@ -1,0 +1,10 @@
+#!/bin/bash
+#====================================================================
+# BASH Login
+#====================================================================
+
+#cd $HOME
+#git pull origin master &> /dev/null
+
+#git config --global core.excludesfile &> /dev/null
+#[ $? ] && git config --global core.excludesfile ~/.gitignore_global

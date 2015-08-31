@@ -1,0 +1,57 @@
+#!/bin/bash
+#====================================================================
+# BASH Prompt
+#====================================================================
+
+# Load in shell colors
+[ -f ~/.bash_colors ] && . ~/.bash_colors
+
+# Load bash completion
+[ -d /etc/bash_completion.d ] && {
+  for f in /etc/bash_completion.d/*; do source $f; done
+}
+
+# Prompt switcher
+function prompt(){
+  case "$1" in
+    default)
+      unset PROMPT_COMMAND
+      PROMPT_COMMAND=prompt_default
+    ;;
+    d)
+      prompt default
+    ;;
+    *)
+      prompt default
+    ;;
+  esac
+}
+
+# Status of last command (for prompt)
+function __lastCmd(){
+  if [ $? -eq 0 ]; then
+    echo -en "${Green}✔${Color_Off}"
+  else
+    echo -en "${Red}✘${Color_Off}"
+  fi
+}
+
+function __user(){
+  user=`whoami`
+  if [[ "$user" == "root" ]]; then
+    echo -en "${Red}$user${Color_Off}"
+  else
+    echo -en "${Green}$user${Color_Off}"
+  fi
+}
+
+function prompt_default(){
+  HostColor=$BYellow
+  CMD="$(__lastCmd)"
+  User="$(__user)"
+  Timestamp=$(date "+%I:%M:%S %p")
+  PS1="${Cyan}[$Timestamp]${Color_Off} $User@${HostColor}\h${Color_Off} ${BGreen}\w${Color_Off}\n$CMD "
+}
+
+##############
+prompt default

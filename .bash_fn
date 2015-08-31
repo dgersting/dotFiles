@@ -1,0 +1,121 @@
+#!/bin/bash
+#====================================================================
+# BASH Functions
+#--------------------------------------------------------------------
+# Some are mine, some are others. Thanks to those who contributed
+#====================================================================
+
+#-------------------------------------------------------------
+# Arch Tools
+#-------------------------------------------------------------
+#if [ -f /etc/arch-release ]; then
+#fi
+
+#-------------------------------------------------------------
+# Debian Tools
+#-------------------------------------------------------------
+
+#-------------------------------------------------------------
+# Redhat Tools
+#-------------------------------------------------------------
+
+#-------------------------------------------------------------
+# Global Tools
+#-------------------------------------------------------------
+# Find a file with a pattern in name:
+function ff() { find . -type f -iname '*'"$*"'*' -ls ; }
+
+# Find a file with pattern $1 in name and Execute $2 on it:
+function fe() { find . -type f -iname '*'"${1:-}"'*' -exec ${2:-file} {} \;  ; }
+
+# Swap 2 filenames around, if they exist (from Uzi's bashrc).
+function swap(){
+    local TMPFILE=tmp.$$
+
+    [ $# -ne 2 ] && echo "swap: 2 arguments needed" && return 1
+    [ ! -e $1 ] && echo "swap: $1 does not exist" && return 1
+    [ ! -e $2 ] && echo "swap: $2 does not exist" && return 1
+
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
+}
+
+# Copy and go to dir
+cpg(){
+  if [ -d "$2" ];then
+    cp $1 $2 && cd $2
+  else
+    cp $1 $2
+  fi
+}
+
+# Move and go to dir
+mvg(){
+  if [ -d "$2" ];then
+    mv $1 $2 && cd $2
+  else
+    mv $1 $2
+  fi
+}
+
+# Make and go to dir
+mkdirg(){
+  mkdir $1 && cd $1
+}
+
+# Handy Extract Program
+function extract(){
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xvjf $1     ;;
+            *.tar.gz)    tar xvzf $1     ;;
+            *.bz2)       bunzip2 $1      ;;
+            *.rar)       unrar x $1      ;;
+            *.gz)        gunzip $1       ;;
+            *.tar)       tar xvf $1      ;;
+            *.tbz2)      tar xvjf $1     ;;
+            *.tgz)       tar xvzf $1     ;;
+            *.zip)       unzip $1        ;;
+            *.Z)         uncompress $1   ;;
+            *.7z)        7z x $1         ;;
+            *)           echo "'$1' cannot be extracted via >extract<" ;;
+        esac
+    else
+        echo "'$1' is not a valid file!"
+    fi
+}
+
+# Creates an archive (*.tar.gz) from given directory.
+function maketar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
+
+# Create a ZIP archive of a file or folder.
+function makezip() { zip -r "${1%%/}.zip" "$1" ; }
+
+# Get IP adress on ethernet.
+function my_ip(){
+    MY_IP=$(/sbin/ifconfig eth0 | awk '/inet/ { print $2 } ' |
+      sed -e s/addr://)
+    echo ${MY_IP:-"Not connected"}
+}
+
+#netinfo - shows network information for your system
+function netinfo(){
+	echo "--------------- Network Information ---------------"
+	/sbin/ifconfig | awk /'inet addr/ {print $2}'
+	/sbin/ifconfig | awk /'Bcast/ {print $3}'
+	/sbin/ifconfig | awk /'inet addr/ {print $4}'
+	/sbin/ifconfig | awk /'HWaddr/ {print $4,$5}'
+	myip=`lynx -dump -hiddenlinks=ignore -nolist http://checkip.dyndns.org:8245/ | sed '/^$/d; s/^[ ]*//g; s/[ ]*$//g' `
+	echo "${myip}"
+	echo "---------------------------------------------------"
+}
+
+#dirsize - finds directory sizes and lists them for the current directory
+function dirsize(){
+	du -shx * .[a-zA-Z0-9_]* 2> /dev/null | \
+	egrep '^ *[0-9.]*[MG]' | sort -n > /tmp/list
+	egrep '^ *[0-9.]*M' /tmp/list
+	egrep '^ *[0-9.]*G' /tmp/list
+	rm -rf /tmp/list
+}
