@@ -45,6 +45,32 @@ type docker >/dev/null 2>&1 && {
     echo "WIP!" 1>2
     systemctl status docker
   }
+  function docker-restart(){
+    systemctl restart docker
+  }
+  function docker-reset(){
+    echo -en "\n\n"
+    echo "╔═══════════════════════════════════════╗"
+    echo "║        Complete  Docker  Reset        ║"
+    echo "╟───────────────────────────────────────╢"
+    echo "║ This function will:                   ║"
+    echo "║  - Stop all containers                ║"
+    echo "║  - Remove all containers and images   ║"
+    echo "║  - Restart the Docker daemon          ║"
+    echo "║                                       ║"
+    echo "║ Procced? (anything but 'yes' cancels) ║"
+    echo "╚═══════════════════════════════════════╝"
+    read -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^yes$ ]]; then
+      docker stop $(docker ps -a -q)  2> /dev/null
+      docker rm   $(docker ps -a -q)  2> /dev/null
+      docker rmi  $(docker images -q) 2> /dev/null
+      docker-restart
+    else
+      echo "Canceled!"
+    fi
+  }
 }
 
 #-------------------------------------------------------------
