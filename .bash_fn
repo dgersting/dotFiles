@@ -34,15 +34,12 @@ type systemctl >/dev/null 2>&1 && {
 #-------------------------------------------------------------
 type docker >/dev/null 2>&1 && {
   function docker-start(){
-    echo "WIP!" 1>2
     systemctl start docker
   }
   function docker-stop(){
-    echo "WIP!" 1>2
     systemctl stop docker
   }
   function docker-status(){
-    echo "WIP!" 1>2
     systemctl status docker
   }
   function docker-restart(){
