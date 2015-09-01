@@ -30,6 +30,24 @@ type systemctl >/dev/null 2>&1 && {
 }
 
 #-------------------------------------------------------------
+# Docker Tools
+#-------------------------------------------------------------
+type docker >/dev/null 2>&1 && {
+  function docker-start(){
+    echo "WIP!" 1>2
+    systemctl start docker
+  }
+  function docker-stop(){
+    echo "WIP!" 1>2
+    systemctl stop docker
+  }
+  function docker-status(){
+    echo "WIP!" 1>2
+    systemctl status docker
+  }
+}
+
+#-------------------------------------------------------------
 # Global Tools
 #-------------------------------------------------------------
 # Find a file with a pattern in name:

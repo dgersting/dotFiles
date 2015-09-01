@@ -69,24 +69,6 @@ type apt-get >/dev/null 2>&1 && {
 #-------------------------------------------------------------
 type yum >/dev/null 2>&1 && {}
 
-#-------------------------------------------------------------
-# Docker Tools
-#-------------------------------------------------------------
-type docker >/dev/null 2>&1 && {
-  function docker-start(){
-    echo "WIP!" 1>2
-    systemctl start docker
-  }
-  function docker-stop(){
-    echo "WIP!" 1>2
-    systemctl stop docker
-  }
-  function docker-status(){
-    echo "WIP!" 1>2
-    systemctl status docker
-  }
-}
-
 #--------------------------------------------------------------------
 # The 'ls' family (this assumes you use a recent GNU ls).
 #--------------------------------------------------------------------
