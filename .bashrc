@@ -1,6 +1,6 @@
 #!/bin/bash
 #====================================================================
-# BASH Config
+# BASH RC (Run per bash shell spawned)
 #====================================================================
 
 # If not running interactively, don't do anything
