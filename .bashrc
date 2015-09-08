@@ -13,7 +13,7 @@
 [ -f ~/.bash_colors ]    && . ~/.bash_colors
 [ -f ~/.bash_prompt ]    && . ~/.bash_prompt
 [ -f ~/.bash_aliases ]   && . ~/.bash_aliases
-[ -f ~/.bash_functions ] && . ~/.bash_functions
+[ -f ~/.bash_functions ] && . ~/.bash_fn
 
 #----------------------
 # Settings and Config
