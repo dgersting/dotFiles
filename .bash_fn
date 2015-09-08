@@ -6,6 +6,41 @@
 #====================================================================
 
 #-------------------------------------------------------------
+# General purpose function (scripting support)
+#-------------------------------------------------------------
+ask(){
+    # http://djm.me/ask
+    while true; do
+
+        if [ "${2:-}" = "Y" ]; then
+            prompt="Y/n"
+            default=Y
+        elif [ "${2:-}" = "N" ]; then
+            prompt="y/N"
+            default=N
+        else
+            prompt="y/n"
+            default=
+        fi
+
+        # Ask the question - use /dev/tty in case stdin is redirected from somewhere else
+        read -p "$1 [$prompt] " REPLY </dev/tty
+
+        # Default?
+        if [ -z "$REPLY" ]; then
+            REPLY=$default
+        fi
+
+        # Check if the reply is valid
+        case "$REPLY" in
+            Y*|y*) return 0 ;;
+            N*|n*) return 1 ;;
+        esac
+
+    done
+}
+
+#-------------------------------------------------------------
 # Arch Tools
 #-------------------------------------------------------------
 #if [ -f /etc/arch-release ]; then
@@ -68,6 +103,47 @@ type docker >/dev/null 2>&1 && {
       echo "Canceled!"
     fi
   }
+}
+
+#-------------------------------------------------------------
+# Setup macros Tools
+#-------------------------------------------------------------
+type nano >/dev/null 2>&1 && {
+	setup-nanorc(){
+		cfg_file=$HOME/.nanorc
+
+		[ -f $cfg_file ] && {
+			if ask "Overwrite existsing user confic file?"; then
+				rm $cfg_file
+			else
+				echo "Ok, goodbye!"
+				exit 1
+			fi
+		}
+
+		cat <<-EOF > $cfg_file
+		set autoindent
+		set tabsize 2
+		set tabstospaces
+		set const
+		set fill 0
+		set nowrap
+		unset historylog
+		set morespace
+		unset mouse
+		set noconvert
+		unset nofollow
+		set rebindkeypad
+		set regexp
+		EOF
+
+		for file in /usr/share/nano/*; do
+			lang=$(expr match "$(basename $file)" '\([a-zA-Z]*\)')
+			ask "Enable syntax support for: $lang " Y && echo "include $file" >> $cfg_file
+		done
+
+		echo -e "\nDone!\n"
+	}
 }
 
 #-------------------------------------------------------------
