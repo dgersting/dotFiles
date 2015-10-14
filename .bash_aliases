@@ -100,7 +100,7 @@ alias cd..='cd ..'
 #-------------------------------------------------------------
 # Development Tools
 #-------------------------------------------------------------
-export HOMESTEAD_DIR='~/Homestead'
+export HOMESTEAD_DIR='~/.homestead/Homestead'
 alias homestead-vm="ssh vagrant@127.0.0.1 -p 2222"
 alias homestead-start="sh -c 'cd $HOMESTEAD_DIR; vagrant up'"
 alias homestead-stop="sh -c 'cd $HOMESTEAD_DIR; vagrant halt'"
