@@ -101,9 +101,9 @@ alias cd..='cd ..'
 # Development Tools
 #-------------------------------------------------------------
 export HOMESTEAD_DIR='~/Homestead'
-alias vm="ssh vagrant@127.0.0.1 -p 2222"
-alias vm-start="sh -c 'cd $HOMESTEAD_DIR; vagrant up'"
-alias vm-stop="sh -c 'cd $HOMESTEAD_DIR; vagrant halt'"
-alias vm-status="sh -c 'cd $HOMESTEAD_DIR; vagrant status'"
-alias vm-wipe="sh -c 'cd $HOMESTEAD_DIR; vagrant destroy --force'"
-alias vm-reload="sh -c 'cd $HOMESTEAD_DIR; vagrant provision'"
+alias homestead-vm="ssh vagrant@127.0.0.1 -p 2222"
+alias homestead-start="sh -c 'cd $HOMESTEAD_DIR; vagrant up'"
+alias homestead-stop="sh -c 'cd $HOMESTEAD_DIR; vagrant halt'"
+alias homestead-status="sh -c 'cd $HOMESTEAD_DIR; vagrant status'"
+alias homestead-wipe="sh -c 'cd $HOMESTEAD_DIR; vagrant destroy --force'"
+alias homestead-reload="sh -c 'cd $HOMESTEAD_DIR; vagrant provision'"
