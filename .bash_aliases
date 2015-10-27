@@ -100,11 +100,13 @@ alias cd..='cd ..'
 #-------------------------------------------------------------
 # Development Tools
 #-------------------------------------------------------------
-export HOMESTEAD_DIR='~/.homestead/Homestead'
-alias homestead-vm="ssh vagrant@127.0.0.1 -p 2222"
-alias homestead-config="nano ~/.homestead/Homestead.yaml"
-alias homestead-start="sh -c 'cd $HOMESTEAD_DIR; vagrant up'"
-alias homestead-stop="sh -c 'cd $HOMESTEAD_DIR; vagrant halt'"
-alias homestead-status="sh -c 'cd $HOMESTEAD_DIR; vagrant status'"
-alias homestead-wipe="sh -c 'cd $HOMESTEAD_DIR; vagrant destroy --force'"
-alias homestead-reload="sh -c 'cd $HOMESTEAD_DIR; vagrant provision'"
+if [ -f ~/.homestead ]; then
+  export HOMESTEAD_DIR='~/.homestead/Homestead'
+  alias homestead-ssh="ssh vagrant@127.0.0.1 -p 2222"
+  alias homestead-config="nano ~/.homestead/Homestead.yaml"
+  alias homestead-start="sh -c 'cd $HOMESTEAD_DIR; vagrant up'"
+  alias homestead-stop="sh -c 'cd $HOMESTEAD_DIR; vagrant halt'"
+  alias homestead-status="sh -c 'cd $HOMESTEAD_DIR; vagrant status'"
+  alias homestead-wipe="sh -c 'cd $HOMESTEAD_DIR; vagrant destroy --force'"
+  alias homestead-reload="sh -c 'cd $HOMESTEAD_DIR; vagrant provision'"
+fi
