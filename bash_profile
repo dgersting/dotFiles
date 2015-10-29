@@ -1,6 +1,6 @@
 #!/bin/bash
 #====================================================================
-# BASH Profile (Run on 1st login shell)
+# BASH Profile (Run per login shell)
 #====================================================================
 
 # Load system-wide profile
@@ -30,11 +30,16 @@ export TZ='/usr/share/zoneinfo/America/New_York'
 [ -z "$JAVA_HOME" ] && [ -d /usr/java/default ]    && export JAVA_HOME='/usr/java/default'
 [ -z "$JAVA_HOME" ] && [ -d /usr/lib/jvm/default ] && export JAVA_HOME='/usr/lib/jvm/default'
 
-# Enable less color support
+# Enable color support
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
 if [ -f /usr/bin/source-highlight-esc.sh ]; then
   export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
   export LESS='-R '
 fi
+
+# Load helper env variables
+export OS_TYPE=$(uname -s)
 
 #----------------------
 # PATH Setup
@@ -62,5 +67,5 @@ fi
 # Add . to the start of PATH for any local executables (Keep at the end of the file to put it at the start of PATH)
 export PATH=".:$PATH"
 
-# Last, we load our .bashrc
+# Last, we load our .bashrc (which isn't auto-run on 1st login shell)
 [ -f ~/.bashrc ] && . ~/.bashrc

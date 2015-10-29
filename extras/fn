@@ -1,0 +1,48 @@
+#!/bin/bash
+#====================================================================
+# BASH Functions
+#--------------------------------------------------------------------
+# Some are mine, some are others. Thanks to those who contributed
+#====================================================================
+
+#-------------------------------------------------------------
+# General purpose functions (scripting support)
+#-------------------------------------------------------------
+sourceFile "$HOME/Dropbox/sync/dotFiles/extras/fn.d/scripting"
+
+#-------------------------------------------------------------
+# General purpose macros
+#-------------------------------------------------------------
+sourceFile "$HOME/Dropbox/sync/dotFiles/extras/fn.d/macros"
+
+#-------------------------------------------------------------
+# Global tools
+#-------------------------------------------------------------
+sourceFile "$HOME/Dropbox/sync/dotFiles/extras/fn.d/fs"
+sourceFile "$HOME/Dropbox/sync/dotFiles/extras/fn.d/network"
+sourceFile "$HOME/Dropbox/sync/dotFiles/extras/fn.d/ssh"
+
+#-------------------------------------------------------------
+# Arch Tools
+#-------------------------------------------------------------
+#sourceFile "$HOME/Dropbox/sync/dotFiles/extras/fn.d/arch-linux"
+
+#-------------------------------------------------------------
+# Debian Tools
+#-------------------------------------------------------------
+[ -f /etc/debian-release ] && sourceFile "$HOME/Dropbox/sync/dotFiles/extras/fn.d/debian"
+
+#-------------------------------------------------------------
+# Redhat Tools
+#-------------------------------------------------------------
+[ -f /etc/redhat-release ] && sourceFile "$HOME/Dropbox/sync/dotFiles/extras/fn.d/rhel"
+
+#-------------------------------------------------------------
+# Systemd Tools
+#-------------------------------------------------------------
+command_exists systemctl && sourceFile "$HOME/Dropbox/sync/dotFiles/extras/fn.d/systemd"
+
+#-------------------------------------------------------------
+# Docker Tools
+#-------------------------------------------------------------
+command_exists docker && sourceFile "$HOME/Dropbox/sync/dotFiles/extras/fn.d/docker"
