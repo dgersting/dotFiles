@@ -3,13 +3,10 @@
 # BASH Prompt
 #====================================================================
 
-# Load in shell colors
-[ -f ~/.bash_colors ] && . ~/.bash_colors
-
 # Load bash completion
-[ -d /etc/bash_completion.d ] && {
-  for f in /etc/bash_completion.d/*; do source $f; done
-}
+# [ -d /etc/bash_completion.d ] && {
+#   for f in /etc/bash_completion.d/*; do source $f; done
+# }
 
 # Prompt switcher
 function prompt(){
