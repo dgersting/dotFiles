@@ -8,6 +8,7 @@
 
 # Load system-wide bashrc
 [ -f /etc/bash.bashrc ] && . /etc/bash.bashrc
+[ -f /etc/bashrc ]      && . /etc/bashrc
 
 sourceFile(){
   [ -f "$1" ] && . "$1"
