@@ -22,10 +22,10 @@ done
 #----------------------
 
 # Bash history settings
-HISTCONTROL=ignoreboth # Ignore duplicate commands and commands that start w/ space (ignoredups:ignorespace)
-HISTSIZE=1000          # Number of items in the bash session's history
-HISTFILESIZE=100000    # Number of items in the history file
-shopt -s histappend    # Append BASH session history to the history file (not simply write it)
+# HISTCONTROL=ignoreboth # Ignore duplicate commands and commands that start w/ space (ignoredups:ignorespace)
+# HISTSIZE=1000          # Number of items in the bash session's history
+# HISTFILESIZE=100000    # Number of items in the history file
+# shopt -s histappend    # Append BASH session history to the history file (not simply write it)
 
 # check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+# shopt -s checkwinsize
