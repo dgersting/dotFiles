@@ -9,7 +9,7 @@
 #----------------------
 # mico helper functions
 #----------------------
-function sourceFile{ [ -f "$1" ] && . "$1"; }
+sourceFile(){ [ -f "$1" ] && . "$1"; }
 
 #----------------------
 # Environment variables
