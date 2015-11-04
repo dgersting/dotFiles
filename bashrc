@@ -10,14 +10,10 @@
 [ -f /etc/bash.bashrc ] && . /etc/bash.bashrc
 [ -f /etc/bashrc ]      && . /etc/bashrc
 
-sourceFile(){
-  [ -f "$1" ] && . "$1"
-}
-
 # Load extra bash files. 1st from Dropbox (if it exists) than from HOME (if it exists)
 files="colors prompt fn aliases"
 for file in $files; do
-  sourceFile "$HOME/Dropbox/sync/dotFiles/extras/$file"
+  sourceFile "$_DOT_FILES/extras/$file"
   sourceFile "$HOME/.bash_$file"
 done
 

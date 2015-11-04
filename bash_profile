@@ -7,8 +7,16 @@
 [ -f /etc/profile ] && . /etc/profile
 
 #----------------------
+# mico helper functions
+#----------------------
+function sourceFile{ [ -f "$1" ] && . "$1"; }
+
+#----------------------
 # Environment variables
 #----------------------
+
+# The magic 'dot-files' var pointing us home (this lets us use relative paths allowing for portability)
+export _DOT_FILES=$(dirname $(readlink $BASH_SOURCE))
 
 # Smart EDITOR (cascade down available editors)
 export EDITOR

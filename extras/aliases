@@ -60,7 +60,7 @@ alias l='ll'
 #-------------------------------------------------------------
 # Dynamicly loaded alias files
 #-------------------------------------------------------------
-[ -f /etc/arch-release ] && sourceFile "$HOME/Dropbox/sync/dotFiles/extras/aliases.d/arch-linux"
-command_exists apt-get   && sourceFile "$HOME/Dropbox/sync/dotFiles/extras/aliases.d/apt"
-command_exists yum       && sourceFile "$HOME/Dropbox/sync/dotFiles/extras/aliases.d/yum"
-[ -f ~/.homestead ]      && sourceFile "$HOME/Dropbox/sync/dotFiles/extras/aliases.d/homestead"
+[ -f /etc/arch-release ] && sourceFile "$_DOT_FILES/extras/aliases.d/arch-linux"
+command_exists apt-get   && sourceFile "$_DOT_FILES/extras/aliases.d/apt"
+command_exists yum       && sourceFile "$_DOT_FILES/extras/aliases.d/yum"
+[ -f ~/.homestead ]      && sourceFile "$_DOT_FILES/extras/aliases.d/homestead"
