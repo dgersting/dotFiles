@@ -56,6 +56,9 @@ export OS_TYPE=$(uname -s)
 # Local bin (if it exists)
 [ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
 
+# Synced bin (via Dropbox)
+[ -d "$HOME/Dropbox/sync/bin" ] && PATH="$HOME/Dropbox/sync/bin:$PATH"
+
 # Local bin (if it exists)
 [ -d "$HOME/scripts/bin" ] && PATH="$HOME/scripts/bin:$PATH"
 
