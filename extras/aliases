@@ -63,4 +63,4 @@ alias l='ll'
 [ -f /etc/arch-release ] && sourceFile "$_DOT_FILES/extras/aliases.d/arch-linux"
 command_exists apt-get   && sourceFile "$_DOT_FILES/extras/aliases.d/apt"
 command_exists yum       && sourceFile "$_DOT_FILES/extras/aliases.d/yum"
-[ -f ~/.homestead ]      && sourceFile "$_DOT_FILES/extras/aliases.d/homestead"
+[ -d ~/.homestead ]      && sourceFile "$_DOT_FILES/extras/aliases.d/homestead"
