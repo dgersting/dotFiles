@@ -9,11 +9,13 @@
 # }
 
 # Prompt switcher
-function prompt(){
+prompt(){
+  trap 'printf "\e[0m" "$_"' DEBUG
   case "$1" in
     default)
       unset PROMPT_COMMAND
       PROMPT_COMMAND=prompt_default
+      true
     ;;
     d)
       prompt default
@@ -24,31 +26,30 @@ function prompt(){
   esac
 }
 
-# Status of last command (for prompt)
-function __lastCmd(){
+__lastCmd(){
   if [ $? -eq 0 ]; then
-    echo -en "${Green}✔${Color_Off}"
+    echo -en "${_Green}✔${_Color_Off}"
   else
-    echo -en "${Red}✘${Color_Off}"
+    echo -en "${_Red}✘${_Color_Off}"
   fi
 }
 
-function __user(){
+__user(){
   user=`whoami`
   if [[ "$user" == "root" ]]; then
-    echo -en "${Red}$user${Color_Off}"
+    echo -en "${_Red}$user${_Color_Off}"
   else
-    echo -en "${Green}$user${Color_Off}"
+    echo -en "${_Cyan}$user${_Color_Off}"
   fi
 }
 
-function prompt_default(){
-  HostColor=$BYellow
-  CMD="$(__lastCmd)"
-  User="$(__user)"
-  Timestamp=$(date "+%I:%M:%S %p")
-  PS1="${Cyan}[$Timestamp]${Color_Off} $User@${HostColor}\h${Color_Off} ${BGreen}\w${Color_Off}\n$CMD "
+
+prompt_default(){
+  smiley=$(__lastCmd)
+  user=$(__user)
+  PS1="$smiley \H $user \w\n\$ "
+  history -a
 }
 
 ##############
-# prompt default
+prompt default

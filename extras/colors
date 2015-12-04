@@ -5,16 +5,25 @@
 
 # Reset
 Color_Off='\e[0m'       # Text Reset
+_Color_Off="\[$Color_Off\]"
 
 # Regular Colors
 Black='\e[0;30m'        # Black
+_Black="\[$Black\]"
 Red='\e[0;31m'          # Red
+_Red="\[$Red\]"
 Green='\e[0;32m'        # Green
+_Green="\[$Green\]"
 Yellow='\e[0;33m'       # Yellow
+_Yellow="\[$Yellow\]"
 Blue='\e[0;34m'         # Blue
+_Blue="\[$Blue\]"
 Purple='\e[0;35m'       # Purple
+_Purple="\[$Purple\]"
 Cyan='\e[0;36m'         # Cyan
+_Cyan="\[$Cyan\]"
 White='\e[0;37m'        # White
+_White="\[$White\]"
 
 # Bold
 BBlack='\e[1;30m'       # Black
