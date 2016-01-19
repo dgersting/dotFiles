@@ -1,21 +1,32 @@
-#!/bin/bash
+
+
+#!/usr/bin/env zsh
 #====================================================================
-# BASH RC (Run per bash shell)
+# ZSHELL RC (Run per shell)
 #====================================================================
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# Load system-wide bashrc
-[ -f /etc/bash.bashrc ] && . /etc/bash.bashrc
-[ -f /etc/bashrc ]      && . /etc/bashrc
+# Load Antigen and hand off to its rc file
+source "$ZDOTDIR/antigen/antigen.zsh"
+source "$ZDOTDIR/.antigenrc"
 
 # Load extra bash files. 1st from Dropbox (if it exists) than from HOME (if it exists)
-files="colors prompt fn aliases"
+# files="colors prompt fn aliases"
+files="fn aliases"
 for file in $files; do
-  sourceFile "$_DOT_FILES/extras/$file"
-  sourceFile "$HOME/.bash_$file"
+  source_file "$ZDOTDIR/extras/$file"
+  source_file "$HOME/.z$file"
 done
+
+# Enable auto-rehash to pick up new bin files
+zstyle ':completion:*' rehash true
+
+# Load my prompt
+#source_file $ZDOTDIR/extras/prompt
+#autoload -U colors && colors
+
 
 #----------------------
 # Settings and Config
@@ -29,3 +40,5 @@ done
 
 # check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
 # shopt -s checkwinsize
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

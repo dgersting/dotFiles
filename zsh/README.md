@@ -1,5 +1,5 @@
-# My persoal .files
-My personal Linux dot files
+# dotFiles - ZSH
+My personal Linux dot files (for ZSH)
 
 # Install
 	git clone https://github.com/dgersting/dotFiles.git ~/.zsh

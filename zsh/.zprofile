@@ -1,22 +1,20 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 #====================================================================
-# BASH Profile (Run per login shell)
+# ZSHELL Profile (Run per login shell)
 #====================================================================
-
-# Load system-wide profile
-[ -f /etc/profile ] && . /etc/profile
 
 #----------------------
 # mico helper functions
 #----------------------
-sourceFile(){ [ -f "$1" ] && . "$1"; }
+source_file(){ [ -f "$1" ] && . "$1"; }
+command_exists(){ command -v "$@" > /dev/null 2>&1 }
 
 #----------------------
 # Environment variables
 #----------------------
 
 # The magic 'dot-files' var pointing us home (this lets us use relative paths allowing for portability)
-export _DOT_FILES=$(dirname $(readlink $BASH_SOURCE))
+# export _DOT_FILES=$(dirname $(readlink $BASH_SOURCE))
 
 # Smart EDITOR (cascade down available editors)
 export EDITOR
@@ -38,14 +36,6 @@ export TZ='/usr/share/zoneinfo/America/New_York'
 [ -z "$JAVA_HOME" ] && [ -d /usr/java/default ]    && export JAVA_HOME='/usr/java/default'
 [ -z "$JAVA_HOME" ] && [ -d /usr/lib/jvm/default ] && export JAVA_HOME='/usr/lib/jvm/default'
 
-# Enable color support
-export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
-if [ -f /usr/bin/source-highlight-esc.sh ]; then
-  export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
-  export LESS='-R '
-fi
-
 # Load helper env variables
 export OS_TYPE=$(uname -s)
 
@@ -54,13 +44,11 @@ export OS_TYPE=$(uname -s)
 #----------------------
 
 # Local bin (if it exists)
-[ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
+[ -d "$HOME/bin" ]  && PATH="$HOME/bin:$PATH"
+[ -d "$HOME/.bin" ] && PATH="$HOME/.bin:$PATH"
 
 # Synced bin (via Dropbox)
 [ -d "$HOME/Dropbox/sync/bin" ] && PATH="$HOME/Dropbox/sync/bin:$PATH"
-
-# Local bin (if it exists)
-[ -d "$HOME/scripts/bin" ] && PATH="$HOME/scripts/bin:$PATH"
 
 # PHP Composer bin (if it exists)
 [ -d "$HOME/.composer/vendor/bin" ] && PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -73,10 +61,6 @@ export OS_TYPE=$(uname -s)
 #[ -d "$HOME/opt/androidDevKit/current/sdk/platform-tools" ] && PATH="$PATH:$HOME/opt/androidDevKit/current/sdk/platform-tools"
 
 # Load RVM
-[ -f ~/.rvm/scripts/rvm ] && . ~/.rvm/scripts/rvm
 
 # Add . to the start of PATH for any local executables (Keep at the end of the file to put it at the start of PATH)
 export PATH=".:$PATH"
-
-# Last, we load our .bashrc (which isn't auto-run on 1st login shell)
-[ -f ~/.bashrc ] && . ~/.bashrc
