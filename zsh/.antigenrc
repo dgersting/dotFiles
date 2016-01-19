@@ -1,0 +1,52 @@
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+#antigen use prezto
+
+# Base set of global plugins
+antigen bundles <<EOBUNDLES
+  history
+  history-substring-search
+  colored-man-pages
+  common-aliases
+  systemadmin
+  bgnotify
+  https://github.com/sorin-ionescu/prezto.git /modules/spectrum
+EOBUNDLES
+
+# Add OS-specific plugins
+case "$OS_TYPE" in
+  Darwin)
+    antigen bundle osx
+    antigen bundle brew
+    antigen bundle brew-cask
+  ;;
+  debian|ubuntu)
+    antigen bundle debian
+    unalias age
+    unalias api
+  ;;
+  fedora|centos)
+    antigen bundle fedora
+  ;;
+esac
+
+# Add command-specific plugins
+cmds="systemd rsync screen git composer vagrant docker grunt rails rake rvm"
+for cmd in $cmds; do
+  command_exists $cmd && antigen bundle $cmd
+done
+
+# Special case: Remove un-needed/conflicting aliases
+unalis jimweirich &> /dev/null # From the rake plugin (RIP rake created)
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Load the theme.
+antigen theme robbyrussell
+
+# Load a local AntigenRC file if it's present
+source_file ~/.antigenrc
+
+# Tell antigen that you're done.
+antigen apply
