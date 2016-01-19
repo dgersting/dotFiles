@@ -1,0 +1,53 @@
+#!/bin/bash
+#====================================================================
+# BASH Functions (for netowrk support)
+#--------------------------------------------------------------------
+# Some are mine, some are others. Thanks to those who contributed
+#====================================================================
+
+# Get IP adress on ethernet.
+my_ip(){
+    MY_IP=$(/sbin/ifconfig eth0 | awk '/inet/ { print $2 } ' |
+      sed -e s/addr://)
+    echo ${MY_IP:-"Not connected"}
+}
+
+#netinfo - shows network information for your system
+netinfo(){
+	echo "--------------- Network Information ---------------"
+	/sbin/ifconfig | awk /'inet addr/ {print $2}'
+	/sbin/ifconfig | awk /'Bcast/ {print $3}'
+	/sbin/ifconfig | awk /'inet addr/ {print $4}'
+	/sbin/ifconfig | awk /'HWaddr/ {print $4,$5}'
+	myip=`lynx -dump -hiddenlinks=ignore -nolist http://checkip.dyndns.org:8245/ | sed '/^$/d; s/^[ ]*//g; s/[ ]*$//g' `
+	echo "${myip}"
+	echo "---------------------------------------------------"
+}
+
+# List all open ports and the process listening on it
+# Can optionally take a set of search strings that will be used to filter results
+# (ie: `ports 80 443` will list all processes listening on ports 80 and 443)
+ports(){
+  # Get open ports
+  case $OS_TYPE in
+    Linux)
+      cmd="netstat -lnp"
+      ;;
+    Darwin)
+      cmd="lsof -i | grep LISTEN"
+      ;;
+    *)
+      echo "Unsupported OS type: $OS_TYPE"
+      return 1
+      ;;
+  esac
+
+  # Add filter (if needed)
+  if [ $# -gt 0 ]; then
+    pattern=$(echo $@ | tr ' ' '|')
+    cmd="$cmd | grep -iE '$pattern'"
+  fi
+
+  # Evaluate the final command
+  eval "sudo $cmd"
+}
