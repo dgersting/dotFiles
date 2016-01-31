@@ -1,0 +1,23 @@
+#!/bin/bash
+#====================================================================
+# BASH Alias (for Arch Linux)
+#--------------------------------------------------------------------
+# Some are mine, some are others. Thanks to those who contributed
+#====================================================================
+
+alias pac-install='sudo pacman -S'
+alias pac-uninstall='sudo pacman -R'
+alias pac-search='pacman -Ss'
+alias pac-refresh='sudo pacman -Syy'
+alias pac-mirrors='sudo reflector --verbose -c US -p http --sort rate --save /etc/pacman.d/mirrorlist'
+alias pac-clean="sudo su -c 'pacman -cS --noconfirm'"
+
+alias aur-install='pacaur -y'
+alias aur-uninstall='pac-uninstall'
+alias aur-search='pacaur -s'
+
+alias arch-install='pacaur -Sy'
+alias arch-uninstall='pac-uninstall'
+alias arch-search='pacaur -Ss'
+alias arch-upgrade='sudo pacman -Sy; pacaur -Su; pac-clean; echo -e "\n${Green}Upgrade completed!${Color_Off}"'
+# alias arch-clean="clean-orphans; clean-pacman;"

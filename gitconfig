@@ -2,14 +2,18 @@
   editor = nano
   excludesfile = ~/.gitignore
   autocrlf = input
+
 [user]
   name = David Gersting
   email = dgersting@gmail.com
-  signingkey = F3A0C37B
+  #signingkey = F3A0C37B
+
 [push]
   default = current
+
 [color]
   ui = auto
+
 [alias]
   ci = commit
   co = checkout

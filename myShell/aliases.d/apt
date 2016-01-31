@@ -1,0 +1,16 @@
+#!/bin/bash
+#====================================================================
+# BASH Alias (for APT tool)
+#--------------------------------------------------------------------
+# Some are mine, some are others. Thanks to those who contributed
+#====================================================================
+
+alias apt-install='sudo apt-get install'
+alias apt-uninstall='sudo apt-get purge'
+alias apt-update='sudo apt-get update'
+alias apt-clean="sudo sh -c 'apt-get autoremove; apt-get autoclean; apt-get clean'"
+alias apt-upgrade="sudo sh -c 'apt-get update; apt-get upgrade; apt-get dist-upgrade;'"
+alias apt-info='apt-cache show'
+alias apt-installed='dpkg-query -l'
+function apt-search(){ \apt-cache search "$1" | sort; }
+function apt-search-names(){ \apt-cache search -n "$1" | sort; }

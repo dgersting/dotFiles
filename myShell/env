@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+
+# Smart EDITOR (cascade down available editors)
+export EDITOR
+[ -z "$EDITOR" ] && type atom &>/dev/null && EDITOR='atom'
+[ -z "$EDITOR" ] && type subl &>/dev/null && EDITOR='subl'
+[ -z "$EDITOR" ] && type nano &>/dev/null && EDITOR='nano'
+[ -z "$EDITOR" ] && type vi   &>/dev/null && EDITOR='vi'
+
+# Set vagrant .dot file to correct location (based on OS)
+export VAGRANT_DOTFILE_PATH="~/.vagrant"
+
+# Set timezone to America/New_York
+export TZ='/usr/share/zoneinfo/America/New_York'
+
+# Set JAVA_HOME
+[ -z "$JAVA_HOME" ] && [ -d /opt/java/current ]    && export JAVA_HOME='/opt/java/current'
+[ -z "$JAVA_HOME" ] && [ -d /usr/java/default ]    && export JAVA_HOME='/usr/java/default'
+[ -z "$JAVA_HOME" ] && [ -d /usr/lib/jvm/default ] && export JAVA_HOME='/usr/lib/jvm/default'
+
+# Load helper env variables
+export OS_TYPE=$(uname -s)

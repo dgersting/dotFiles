@@ -1,0 +1,58 @@
+#!/bin/bash
+#====================================================================
+# BASH Prompt
+#====================================================================
+
+# Load shell colors
+load_dot_file "myShell/colors"
+
+# Load bash completion
+# [ -d /etc/bash_completion.d ] && {
+#   for f in /etc/bash_completion.d/*; do source $f; done
+# }
+
+# Prompt switcher
+prompt(){
+  trap 'printf "\e[0m" "$_"' DEBUG
+  case "$1" in
+    default)
+      unset PROMPT_COMMAND
+      PROMPT_COMMAND=prompt_default
+      true
+    ;;
+    d)
+      prompt default
+    ;;
+    *)
+      prompt default
+    ;;
+  esac
+}
+
+__lastCmd(){
+  if [ $? -eq 0 ]; then
+    echo -en "${_Green}✔${_Color_Off}"
+  else
+    echo -en "${_Red}✘${_Color_Off}"
+  fi
+}
+
+__user(){
+  user=`whoami`
+  if [[ "$user" == "root" ]]; then
+    echo -en "${_Red}$user${_Color_Off}"
+  else
+    echo -en "${_Cyan}$user${_Color_Off}"
+  fi
+}
+
+
+prompt_default(){
+  smiley=$(__lastCmd)
+  user=$(__user)
+  PS1="$smiley \H $user \w\n\$ "
+  history -a
+}
+
+##############
+prompt default

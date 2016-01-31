@@ -1,0 +1,44 @@
+#!/bin/bash
+#====================================================================
+# BASH Functions (for scripted macros)
+#--------------------------------------------------------------------
+# Some are mine, some are others. Thanks to those who contributed
+#====================================================================
+
+command_exists nano && {
+	setup-nanorc(){
+		cfg_file=$HOME/.nanorc
+
+		[ -f $cfg_file ] && {
+			if ask "Overwrite existsing user confic file?"; then
+				rm $cfg_file
+			else
+				echo "Ok, goodbye!"
+				exit 1
+			fi
+		}
+
+		cat <<-EOF > $cfg_file
+		set autoindent
+		set tabsize 2
+		set tabstospaces
+		set const
+		set fill 0
+		set nowrap
+		unset historylog
+		set morespace
+		unset mouse
+		set noconvert
+		unset nofollow
+		set rebindkeypad
+		set regexp
+		EOF
+
+		for file in /usr/share/nano/*; do
+			lang=$(expr match "$(basename $file)" '\([a-zA-Z]*\)')
+			ask "Enable syntax support for: $lang " Y && echo "include $file" >> $cfg_file
+		done
+
+		echo -e "\nDone!\n"
+	}
+}
