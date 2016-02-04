@@ -7,10 +7,13 @@
 [ -z "$PS1" ] && return
 
 # Load aliases
-load_dot_file "_aliases"
+load_dot_file "myShell/aliases"
 
 # Load functions
-load_dot_file "_func"
+load_dot_file "myShell/func"
+
+# Load my prompt!
+load_dot_file "myShell/prompt"
 
 # Load local files
 # source_file "~/."
