@@ -8,15 +8,14 @@
 
 # The magic 'dot-files' var pointing us home
 # (this lets us use relative paths allowing for portability)
-_DOT_FILES=$(dirname $(readlink $BASH_SOURCE))
-if [[ ${_DOT_FILES:0:1} != "/" ]]; then _DOT_FILES="$HOME/$_DOT_FILES"; fi
+export DOTFILES="$HOME/.dotFiles"
 
 #----------------------
 # mico helper functions
 #----------------------
 command_exists(){ command -v "$@" > /dev/null 2>&1; }
 source_file(){ [ -f "$1" ] && . "$1"; }
-load_dot_file(){ source_file "$_DOT_FILES/$1"; }
+load_dot_file(){ source_file "$DOTFILES/$1"; }
 
 #------------------
 # Setup environment

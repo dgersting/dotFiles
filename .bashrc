@@ -15,6 +15,10 @@ load_dot_file "myShell/func"
 # Load my prompt!
 load_dot_file "myShell/prompt"
 
+# Logacy systems
+if [ `uname` == "SunOS" ]; then
+  export TERM=vt100
+fi
 
 # Load system-wide bashrc
 # [ -f /etc/bash.bashrc ] && . /etc/bash.bashrc
