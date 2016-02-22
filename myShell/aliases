@@ -39,7 +39,7 @@ alias lc='ls -lhtcr'       # Sort by/show change time,most recent last.
 alias lu='ls -lhtur'       # Sort by/show access time,most recent last.
 
 # The ubiquitous 'll': directories first, with alphanumeric sorting:
-alias ll="ls -lhv"
+alias ll="ls -lh"
 alias lm='ll | more'   #  Pipe through 'more'
 alias lr='ll -R'       #  Recursive ls.
 alias la='ll -A'       #  Show hidden files.
