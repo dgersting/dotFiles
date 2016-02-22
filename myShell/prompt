@@ -38,11 +38,14 @@ __lastCmd(){
 }
 
 __user(){
-  user=`whoami`
-  if [[ "$user" == "root" ]]; then
-    echo -en "${_Red}$user${_Color_Off}"
+  [ -z "$_user" ] && [ ! -z "$USER" ]       && _user="$USER"
+  [ -z "$_user" ] && command_exists whoami  && _user=`whoami`
+  [ -z "$_user" ] && command_exists who     && _user=`who am i | awk '{print $1}'`
+  [ -z "$_user" ] && _user="UNKNOWN"
+  if [ "$_user" == "root" ] || [ "$_user" == "UNKNOWN" ]; then
+    echo -en "${_Red}$_user${_Color_Off}"
   else
-    echo -en "${_Cyan}$user${_Color_Off}"
+    echo -en "${_Cyan}$_user${_Color_Off}"
   fi
 }
 
