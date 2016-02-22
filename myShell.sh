@@ -65,7 +65,7 @@ __usage(){
 __wget(){
   command_exists wget && {
     __stdout "Downloading '$1' via wget"
-    wget "$1" -O "$2" &> /dev/null
+    wget "$1" -O "$2" --no-check-certificate 1> /dev/null
     ret=$?
     [ $? -eq 0 ] && __stdout "Saved to: $2"
     return $ret
