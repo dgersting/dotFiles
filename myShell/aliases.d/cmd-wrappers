@@ -5,4 +5,13 @@
 # Simple command wrappers
 #====================================================================
 
+# Enable color support
+type dircolors >/dev/null 2>&1 && colorSupport="--color=auto" || colorSupport=""
+alias ls="ls $colorSupport"
+alias dir="dir $colorSupport"
+alias vdir="vdir $colorSupport"
+alias grep="grep $colorSupport"
+alias fgrep="fgrep $colorSupport"
+alias egrep="egrep $colorSupport"
+
 command_exists watch && alias watch='watch --color --errexit'

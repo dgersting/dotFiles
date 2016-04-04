@@ -17,17 +17,6 @@ alias c='clear'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-#-------------------------------------------------------------
-# Enable color support
-#-------------------------------------------------------------
-type dircolors >/dev/null 2>&1 && colorSupport="--color=auto" || colorSupport=""
-alias ls="ls $colorSupport"
-alias dir="dir $colorSupport"
-alias vdir="vdir $colorSupport"
-alias grep="grep $colorSupport"
-alias fgrep="fgrep $colorSupport"
-alias egrep="egrep $colorSupport"
-
 #--------------------------------------------------------------------
 # The 'ls' family (this assumes you use a recent GNU ls).
 #--------------------------------------------------------------------
