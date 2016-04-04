@@ -1,0 +1,8 @@
+#!/bin/bash
+#====================================================================
+# BASH Alias (Darwin / OSX)
+#--------------------------------------------------------------------
+# Some are mine, some are others. Thanks to those who contributed
+#====================================================================
+
+command_exists htop && alias htop='sudo htop'
