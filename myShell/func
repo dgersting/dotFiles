@@ -25,7 +25,7 @@ load_dot_file "myShell/func.d/ssh"
 #-------------------------------------------------------------
 # Arch Tools
 #-------------------------------------------------------------
-load_dot_file "myShell/func.d/arch-linux"
+command_exists pacman && load_dot_file "myShell/func.d/arch-linux"
 
 #-------------------------------------------------------------
 # Debian Tools
