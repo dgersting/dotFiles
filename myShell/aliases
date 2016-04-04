@@ -57,6 +57,8 @@ alias path='echo -e ${PATH//:/\\n}' # Pretty-print of some PATH variables
 alias cd..='cd ..'
 alias l='ll'
 
+load_dot_file "myShell/aliases.d/cmd-wrappers"
+
 #-------------------------------------------------------------
 # Dynamicly loaded alias files
 #-------------------------------------------------------------
