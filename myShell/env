@@ -20,3 +20,6 @@ export TZ='/usr/share/zoneinfo/America/New_York'
 
 # Load helper env variables
 export OS_TYPE=$(uname -s)
+
+# Turn on color support
+export CLICOLOR=1
