@@ -15,7 +15,7 @@ load_dot_file "myShell/func"
 # Load my prompt!
 load_dot_file "myShell/prompt"
 
-# Logacy systems
+# Legacy systems
 if [ `uname` == "SunOS" ]; then
   export TERM=vt100
   export PATH="$PATH:/usr/sfw/bin"
