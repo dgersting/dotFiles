@@ -9,6 +9,8 @@
 
 # PHP Composer bin (if it exists)
 [ -d "$HOME/.composer/vendor/bin" ] && PATH="$HOME/.composer/vendor/bin:$PATH"
+[ -d "$HOME/.config/composer/vendor/bin" ] && PATH="$HOME/.config/composer/vendor/bin:$PATH"
+
 
 # RVM bin (if it exists)
 [ -d "$HOME/.rvm/bin" ] && PATH="$HOME/.rvm/bin:$PATH"
