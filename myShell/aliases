@@ -9,7 +9,7 @@
 # Basic, high-level aliases
 #-------------------------------------------------------------
 alias which='type -a'
-alias df='df -kTh' # Human-readable filesystem filesizes
+alias df='df -h'
 alias reset='cd ~; clear'
 alias r='reset'
 alias h='cd ~'
