@@ -17,6 +17,11 @@ command_exists(){ command -v "$@" > /dev/null 2>&1; }
 source_file(){ [ -f "$1" ] && . "$1"; }
 load_dot_file(){ source_file "$DOTFILES/$1"; }
 
+#--------------------------------------------
+# Load local 'secrets' file if it exists
+#--------------------------------------------
+source_file "$HOME/.bash_secrets"
+
 #------------------
 # Setup environment
 #------------------
