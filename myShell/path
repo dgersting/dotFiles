@@ -21,7 +21,12 @@
 
 # Load RVM
 
+# Prefix PATH with composer vendor bin/
+PATH="./vendor/bin:$PATH"
 
+# Prefix PATH with a local bin/
+PATH="./bin:$PATH"
 
-# Add . to the start of PATH for any local executables (Keep at the end of the file to put it at the start of PATH)
-export PATH=".:$PATH"
+# Add . to the start of PATH for any local executables
+PATH=".:$PATH"
+export $PATH
