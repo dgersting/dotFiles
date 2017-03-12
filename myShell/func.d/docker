@@ -35,7 +35,6 @@ function docker-reset(){
     docker stop $(docker ps -a -q)  2> /dev/null
     docker rm   $(docker ps -a -q)  2> /dev/null
     docker rmi  $(docker images -q) 2> /dev/null
-    docker-restart
   else
     echo "Canceled!"
   fi
