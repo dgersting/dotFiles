@@ -1,0 +1,28 @@
+#!/bin/bash
+#====================================================================
+# BASH Alias (for Arch Linux)
+#--------------------------------------------------------------------
+# Some are mine, some are others. Thanks to those who contributed
+#====================================================================
+
+# alias homestead-ssh="sh -c 'cd $HOMESTEAD_DIR; vagrant ssh'"
+# alias homestead-config="$EDITOR $HOMESTEAD_DIR/Homestead.yaml"
+# alias homestead-start="sh -c 'cd $HOMESTEAD_DIR; vagrant up'"
+# alias homestead-stop="sh -c 'cd $HOMESTEAD_DIR; vagrant halt'"
+# alias homestead-status="sh -c 'cd $HOMESTEAD_DIR; vagrant status'"
+# alias homestead-wipe="sh -c 'cd $HOMESTEAD_DIR; vagrant destroy --force'"
+# alias homestead-reload="sh -c 'cd $HOMESTEAD_DIR; vagrant provision'"
+# alias homestead-upgrade="sh -c 'cd $HOMESTEAD_DIR; git pull; vagrant box update'"
+function homestead() {
+  case $1 in
+    config)
+      $EDITOR $HOMESTEAD_DIR/Homestead.yaml
+      ;;
+    upgrade)
+      ( cd "$HOMESTEAD_DIR" && git pull && vagrant box update )
+      ;;
+    *)
+      ( cd "$HOMESTEAD_DIR" && vagrant $* )
+      ;;
+  esac
+}

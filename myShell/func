@@ -57,3 +57,9 @@ command_exists docker && load_dot_file "myShell/func.d/docker"
 # LDAP Tools
 #-------------------------------------------------------------
 command_exists ldapsearch && load_dot_file "myShell/func.d/ldap"
+
+#-------------------------------------------------------------
+# Laravel Homestead (https://laravel.com/docs/master/homestead)
+#-------------------------------------------------------------
+export HOMESTEAD_DIR="$HOME/.homestead"
+[ -d "$HOMESTEAD_DIR" ] && load_dot_file "myShell/func.d/homestead"
