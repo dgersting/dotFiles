@@ -13,14 +13,31 @@
 # alias homestead-wipe="sh -c 'cd $HOMESTEAD_DIR; vagrant destroy --force'"
 # alias homestead-reload="sh -c 'cd $HOMESTEAD_DIR; vagrant provision'"
 # alias homestead-upgrade="sh -c 'cd $HOMESTEAD_DIR; git pull; vagrant box update'"
+
+# Make sure our env var is set
+[ -z "$HOMESTEAD_DIR" ] export HOMESTEAD_DIR="$HOME/.homestead"
+
+# The homestead function
 function homestead() {
   case $1 in
     config)
       $EDITOR $HOMESTEAD_DIR/Homestead.yaml
       ;;
+
     upgrade)
       ( cd "$HOMESTEAD_DIR" && git pull && vagrant box update )
       ;;
+
+    share)
+      # Proxy the command into the running VM
+      # Docs: https://laravel.com/docs/5.4/homestead#sharing-your-environment
+      [ -z "$2" ] && {
+        echo -e "ERROR: Missing site name!\n\nUsage: homestead share <site_name>\n" 1>&2
+        return 1
+      }
+      ( cd "$HOMESTEAD_DIR" && vagrant ssh -- -t "bash -ic \"share $2\"" )
+      ;;
+
     *)
       ( cd "$HOMESTEAD_DIR" && vagrant $* )
       ;;
