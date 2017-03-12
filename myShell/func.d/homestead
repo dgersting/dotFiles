@@ -44,6 +44,7 @@ function homestead() {
       ;;
 
     config)
+      [ -z "$EDITOR" ] && EDITOR=vi
       $EDITOR $HOMESTEAD_DIR/Homestead.yaml
       return 0
       ;;
