@@ -19,13 +19,41 @@
 
 # The homestead function
 function homestead() {
-  case $1 in
+  case "$1" in
+    start|up)
+      ( cd "$HOMESTEAD_DIR" && vagrant up $* )
+      return 0
+      ;;
+
+    stop|halt)
+      ( cd "$HOMESTEAD_DIR" && vagrant halt $* )
+      return 0
+      ;;
+
+    rebuild)
+      ( cd "$HOMESTEAD_DIR" && vagrant reload --provision )
+      return 0
+      ;;
+
     config)
       $EDITOR $HOMESTEAD_DIR/Homestead.yaml
+      return 0
       ;;
 
     upgrade)
       ( cd "$HOMESTEAD_DIR" && git pull && vagrant box update )
+      return 0
+      ;;
+
+    sites)
+      # TODO: Parse Homestead.yaml to extract mapped sites
+      return 0
+      ;;
+
+    vagrant)
+      shift
+      ( cd "$HOMESTEAD_DIR" && vagrant $* )
+      return 0
       ;;
 
     share)
@@ -36,10 +64,40 @@ function homestead() {
         return 1
       }
       ( cd "$HOMESTEAD_DIR" && vagrant ssh -- -t "bash -ic \"share $2\"" )
+      return 0
       ;;
 
     *)
-      ( cd "$HOMESTEAD_DIR" && vagrant $* )
+      echo "Usage: homestead {start|stop|rebuild|config|upgrade|vagrant|share} <options>" 1>&2
+      return 1
       ;;
   esac
 }
+
+_homestead_homesteadOptions=$(homestead 2>&1 | egrep -o '\w+' | tail -n +3 | head -n -1)
+_homestead_vagrantOptions=$(vagrant list-commands | tail -n +4 | awk '{print $1}')
+function _homestead {
+  local cur prev opts
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+  case "$prev" in
+    homestead)
+      COMPREPLY=( $(compgen -W "${_homestead_homesteadOptions}" -- ${cur}) )
+      return 0
+      ;;
+
+    vagrant)
+      COMPREPLY=( $(compgen -W "${_homestead_vagrantOptions}" -- ${cur}) )
+      return 0
+      ;;
+
+    share)
+      opts=$(homestead sites)
+      COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+      return 0
+      ;;
+  esac
+}
+complete -F _homestead homestead
