@@ -15,7 +15,7 @@
 # alias homestead-upgrade="sh -c 'cd $HOMESTEAD_DIR; git pull; vagrant box update'"
 
 # Make sure our env var is set
-[ -z "$HOMESTEAD_DIR" ] export HOMESTEAD_DIR="$HOME/.homestead"
+[ -z "$HOMESTEAD_DIR" ] && export HOMESTEAD_DIR="$HOME/.homestead"
 
 # The homestead function
 function homestead() {
