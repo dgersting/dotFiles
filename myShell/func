@@ -21,6 +21,12 @@ load_dot_file "myShell/func.d/macros"
 load_dot_file "myShell/func.d/fs"
 load_dot_file "myShell/func.d/network"
 load_dot_file "myShell/func.d/ssh"
+load_dot_file "myShell/func.d/projects"
+
+#-------------------------------------------------------------
+# Livestreamer (http://docs.livestreamer.io)
+#-------------------------------------------------------------
+command_exists livestreamer && load_dot_file "myShell/func.d/livestreamer"
 
 #-------------------------------------------------------------
 # Arch Tools
@@ -46,3 +52,8 @@ command_exists systemctl && load_dot_file "myShell/func.d/systemd"
 # Docker Tools
 #-------------------------------------------------------------
 command_exists docker && load_dot_file "myShell/func.d/docker"
+
+#-------------------------------------------------------------
+# LDAP Tools
+#-------------------------------------------------------------
+command_exists ldapsearch && load_dot_file "myShell/func.d/ldap"
