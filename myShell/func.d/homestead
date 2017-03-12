@@ -21,12 +21,20 @@
 function homestead() {
   case "$1" in
     start|up)
+      shift
       ( cd "$HOMESTEAD_DIR" && vagrant up $* )
       return 0
       ;;
 
     stop|halt)
+      shift
       ( cd "$HOMESTEAD_DIR" && vagrant halt $* )
+      return 0
+      ;;
+
+    ssh)
+      shift
+      ( cd "$HOMESTEAD_DIR" && vagrant ssh $* )
       return 0
       ;;
 
@@ -68,7 +76,7 @@ function homestead() {
       ;;
 
     *)
-      echo "Usage: homestead {start|stop|rebuild|config|upgrade|vagrant|share} <options>" 1>&2
+      echo "Usage: homestead {start|stop|ssh|rebuild|config|upgrade|vagrant|share} <options>" 1>&2
       return 1
       ;;
   esac
